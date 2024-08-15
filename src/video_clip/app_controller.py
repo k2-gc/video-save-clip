@@ -167,8 +167,11 @@ class Controller:
             self.update_frame()
             return
         elif event.keysym in self.quit_key:
+            del self.model
+            del self.view
             self.root.destroy()
             self.root.quit()
+            del self
         else:
             pass
         #     self.logger.info(f"No functions is assigned to key '{event.keysym}'")

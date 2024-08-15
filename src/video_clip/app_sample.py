@@ -9,7 +9,6 @@ def run_app():
     root = tk.Tk()
     controller = Controller(root)
     root.mainloop()
-    del controller
     logger.info("Stop App")
 
 
