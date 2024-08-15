@@ -117,7 +117,7 @@ class Controller:
         
         """
         fTyp = [("", "*mp4")]
-        iDir = os.path.abspath(os.path.dirname(__file__))
+        iDir = os.path.abspath(os.getcwd())
         file_path = tk.filedialog.askopenfilename(filetypes=fTyp, initialdir=iDir)
         if file_path == "":
             return
