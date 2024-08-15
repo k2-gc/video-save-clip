@@ -1,0 +1,15 @@
+[project]
+name = "video_viewer_save_clip"
+version = "1.0.0"
+requires-python = ">= 3.8"
+dependencies = [
+    "numpy",
+    "opencv-python",
+    "pillow",
+    "tqdm",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["*"]
+exclude = [""]
