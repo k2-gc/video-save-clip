@@ -1,5 +1,5 @@
 """
-VideoViewer and SaveClip
+Video Clip
 =====
 
 Provides

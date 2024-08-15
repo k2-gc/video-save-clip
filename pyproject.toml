@@ -1,5 +1,5 @@
 [project]
-name = "video_viewer_save_clip"
+name = "video_clip"
 version = "1.0.0"
 requires-python = ">= 3.8"
 dependencies = [
