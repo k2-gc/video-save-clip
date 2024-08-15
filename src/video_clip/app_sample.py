@@ -7,8 +7,9 @@ def run_app():
     logger = get_logger()
     logger.info("Start App")
     root = tk.Tk()
-    Controller(root)
+    controller = Controller(root)
     root.mainloop()
+    del controller
     logger.info("Stop App")
 
 
