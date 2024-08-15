@@ -19,23 +19,14 @@ class View(tk.Frame):
         self.logger = get_logger()
         self.logger.info("Init View class")
 
-        # # Create tkinter widgets
+        # Create tkinter widgets
         self.width = 0
         self.height = 0
         self.tool_bar = None
         self.image_frame = None
         self.slider_bar = None
         self.command_bar = None
-        # self.tool_bar.grid(column=0, row=0, padx=2, pady=2, sticky="NEWS")
-        # self.image_frame.grid(column=0, row=1, padx=2, pady=2)
-        # self.slider_bar.grid(row=2, sticky="NEWS")
-        # self.command_bar.grid(row=3, sticky="NEWS")
-        # for i in range(6):
-        #     self.command_bar.grid_columnconfigure(i, weight=1)
         self.canvas = None
-        # img = Image.open("sample.png")
-        # img = img.resize((self.width, self.height))
-        # self.image_tk = ImageTk.PhotoImage(img)
         self.file_dialog = None
         self.help_label = None
         # TODO: Combbox
@@ -49,31 +40,10 @@ class View(tk.Frame):
         self.fps_label1 = None
         self.fps_label2 = None
         self.save_frame_num = None
-        # self.save_frame_num.set("")
         self.save_num_input = None
         self.video_clip = None
         self.frame_clip = None
-        # command_button = [
-        #     self.video_clip_start,
-        #     self.video_clip_start_label,
-        #     self.video_clip_stop,
-        #     self.video_clip_stop_label,
-        #     self.video_clip,
-        #     self.fps_label1,
-        #     self.save_num_input,
-        #     self.fps_label2,
-        #     self.frame_clip,
-        # ]
-        # for i, command in enumerate(command_button):
-        #     command.grid(column=i, row=0)
-        #     command.grid_columnconfigure(1, weight=1)
-        # self.file_dialog.grid(column=0, row=0, padx=(2, 2), pady=2)
-        # self.help_label.grid(column=1, row=0, padx=(2, 2), pady=2)
-        # # self.comb.grid(column=2, row=0, padx=(2, 2), pady=2)
-        # self.canvas.grid(column=0, row=0)
-        # # self.canvas.create_image(0, 0, image=self.image_tk, anchor=tk.NW)
         self.slider = None
-        # self.slider.grid(sticky="NEWS")
         self._create_window(640, 480)
 
     def __del__(self):
