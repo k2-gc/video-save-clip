@@ -26,7 +26,7 @@ python -m video_clip.app_sample
 ### App Screen
 A Window like below will be displayed.
 
-<img src="./img/app_window.png" />
+<img src="./img/app_window.jpeg" />
 
 ### How to use it
 1. Choose "File" button.
