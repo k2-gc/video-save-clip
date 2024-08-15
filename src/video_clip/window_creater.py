@@ -16,6 +16,7 @@ class View(tk.Frame):
     def __init__(self, parent: tk.Tk):
         super().__init__(parent)
         self.parent = parent
+        self.parent.title("Video Clip")
         self.logger = get_logger()
         self.logger.info("Init View class")
 
