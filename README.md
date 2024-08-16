@@ -37,7 +37,7 @@ A Window like below will be displayed.
 2. Choose a mp4 video you want to open on a filedialog.
 
 
-3. The video frame will be show on a screen (In blue rectangle)
+3. The video frame will be shown on a screen (In blue rectangle)
 <img src="./img/func.jpeg" />
 
 4. Change a displayed frame by using a slider or left/right key on keyboard (In red rectangle)
