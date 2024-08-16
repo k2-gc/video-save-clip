@@ -1,5 +1,7 @@
 # Video Save Clip
 
+Language: En/[Ja](./README_ja.md)
+
 ## Overview
 This code allows you to clip mp4 video file and to save frames in the video.
 
