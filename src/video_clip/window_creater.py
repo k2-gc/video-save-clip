@@ -67,8 +67,11 @@ class View(tk.Frame):
             width: Frame width
             height: Frame height
         """
-        self.width = width
-        self.height = height
+        if width > 1900:
+            width //= 2
+            height //= 2
+        self.width = int(width)
+        self.height = int(height)
         self.tool_bar = tk.Frame(self.parent, width=self.width)
         self.image_frame = tk.Frame(self.parent)
         self.slider_bar = tk.Frame(self.parent, width=100)
