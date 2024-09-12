@@ -7,6 +7,7 @@ This code allows you to clip mp4 video file and to save frames in the video.
 
 ## Checked work env
 * Mac
+* Windows11 (A bug: Fail to delete copied "tmp.mp4" video file to open)
 
 ## Prerequisites
 * Python>=3.8
