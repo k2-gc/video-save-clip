@@ -205,7 +205,7 @@ class Model:
             index_list.append(tmp)
         out_dir = get_suffix(video_name, False)
         Path(out_dir).mkdir()
-        for i in tqdm(range(frame_num_in_span)):
+        for i in tqdm(range(frame_num_in_span+1)):
             ret, frame = self.cap.read()
             if not ret:
                 self.logger.warning(f"Frame finished")
