@@ -67,7 +67,10 @@ class View(tk.Frame):
             width: Frame width
             height: Frame height
         """
-        if width > 1900:
+        if width > 3000:
+            width //= 4
+            height //= 4
+        elif width > 1900:
             width //= 2
             height //= 2
         self.width = int(width)
