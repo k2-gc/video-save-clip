@@ -22,6 +22,12 @@ pip install dist/video_clip-1.0.0-py3-none-any.whl
 ```
 
 ## Usage
+### App Run Using CLI
+Run the command below.
+```bash
+video-clip run
+```
+
 ### App Run
 Run the command below.
 ```bash
