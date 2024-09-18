@@ -7,9 +7,12 @@ dependencies = [
     "opencv-python",
     "pillow",
     "tqdm",
+    "fire",
 ]
 
 [tool.setuptools.packages.find]
 where = ["src"]
 include = ["*"]
 exclude = [""]
+[project.scripts]
+video-clip = "video_clip.cli:app"
