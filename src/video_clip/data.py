@@ -20,6 +20,8 @@ class Model:
         self.logger = get_logger()
         self.logger.info("Init Model class")
         self.tmp_video_path = "tmp.mp4"
+        self.output_tmp_video_path = "tmp2.mp4"
+        self.output_tmp_frame_path = "tmp.jpg"
         self.cap = None
         self.current_frame_index = 0
         self.video_len = 0
@@ -161,7 +163,7 @@ class Model:
         clip_frame_num = self.clip_stop_pos - self.clip_start_pos
         fourcc = cv2.VideoWriter_fourcc(*"mp4v")
         out_path = get_suffix(video_name)
-        video = cv2.VideoWriter(out_path, fourcc, self.video_fps, (int(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))))
+        video = cv2.VideoWriter(self.output_tmp_video_path, fourcc, self.video_fps, (int(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))))
         # TODO: tkinter progress bar 
         for _ in tqdm(range(clip_frame_num+1)):
             ret, frame = self.cap.read()
@@ -171,6 +173,7 @@ class Model:
             
             video.write(frame)
         video.release()
+        shutil.move(self.output_tmp_video_path, out_path)
         return True
     
     def save_frame(self, video_name):
@@ -212,6 +215,7 @@ class Model:
                 break
             if not i in index_list:
                 continue
-            cv2.imwrite(f"{out_dir}/frame_{str(self.clip_start_pos+i).zfill(10)}.jpg", frame)
+            cv2.imwrite(self.output_tmp_frame_path, frame)
+            shutil.move(self.output_tmp_frame_path, f"{out_dir}/frame_{str(self.clip_start_pos+i).zfill(10)}.jpg")
         return True
     
