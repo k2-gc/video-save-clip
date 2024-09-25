@@ -67,8 +67,10 @@ class Controller:
         
         """
         self.logger.info("Clip videos")
-        if not self.model.clip(self.video_name):
+        progbar = self.view.create_progress_bar("Clipping...")
+        if not self.model.clip(self.video_name, progbar):
             self.logger.warning("Clip video failed")
+        self.view.delete_progress_bar()
 
     def clip_frame(self):
         """Clip and save frames in the span as images.
@@ -76,8 +78,10 @@ class Controller:
         """
         
         self.logger.info("Clip frames")
-        if not self.model.save_frame(self.video_name):
+        progbar = self.view.create_progress_bar()
+        if not self.model.save_frame(self.video_name, progbar):
             self.logger.warning("Clip frames failed")
+        self.view.delete_progress_bar()
         
 
     def help(self):

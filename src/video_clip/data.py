@@ -6,6 +6,7 @@ import tkinter as tk
 import cv2
 from PIL import Image
 from tqdm import tqdm
+from tqdm.contrib import tenumerate
 
 from .utils import get_logger, get_suffix
 
@@ -145,7 +146,7 @@ class Model:
             return self.clip_start_pos
         return self.clip_stop_pos
 
-    def clip(self, video_name: str):
+    def clip(self, video_name: str, progbar):
         # TODO: Move video name from app_cotroller.py to data.py
         """Clip video between 'start pos' and 'stop pos'
 
@@ -164,19 +165,22 @@ class Model:
         fourcc = cv2.VideoWriter_fourcc(*"mp4v")
         out_path = get_suffix(video_name)
         video = cv2.VideoWriter(self.output_tmp_video_path, fourcc, self.video_fps, (int(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))))
-        # TODO: tkinter progress bar 
-        for _ in tqdm(range(clip_frame_num+1)):
+
+        progbar.config(length=400, mode="determinate", maximum=clip_frame_num+1)
+        for i in tqdm(range(clip_frame_num+1)):
             ret, frame = self.cap.read()
             if not ret:
                 self.logger.warning(f"Frame finished")
                 break
             
             video.write(frame)
+            progbar.config(value=i)
+            progbar.update()
         video.release()
         shutil.move(self.output_tmp_video_path, out_path)
         return True
     
-    def save_frame(self, video_name):
+    def save_frame(self, video_name, progbar):
         # TODO: Move video name from app_cotroller.py to data.py
         """Save frames between 'start pos' and 'stop pos'
             Save 'self.save_frame_num' frames
@@ -212,16 +216,20 @@ class Model:
         # Expect over 10FPS * 20min
         if frame_num_in_span > 12000:
             tmp_cap = cv2.VideoCapture(self.tmp_video_path)
-            for index in tqdm(index_list):
+            progbar.config(length=400, mode="determinate", maximum=len(index_list))
+            for i, index in tenumerate(index_list):
                 tmp_cap.set(cv2.CAP_PROP_POS_FRAMES, index+self.clip_start_pos)
                 ret, frame = tmp_cap.read()
                 if not ret:
                     break
                 cv2.imwrite(self.output_tmp_frame_path, frame)
                 shutil.move(self.output_tmp_frame_path, f"{out_dir}/frame_{str(index+self.clip_start_pos).zfill(10)}.jpg")
+                progbar.config(value=i+1)
+                progbar.update()
             tmp_cap.release()
         else:
             # Including bug
+            progbar.config(length=400, mode="determinate", maximum=frame_num_in_span+1)
             for i in tqdm(range(frame_num_in_span+1)):
                 ret, frame = self.cap.read()
                 if not ret:
@@ -231,4 +239,6 @@ class Model:
                     continue
                 cv2.imwrite(self.output_tmp_frame_path, frame)
                 shutil.move(self.output_tmp_frame_path, f"{out_dir}/frame_{str(self.clip_start_pos+i).zfill(10)}.jpg")
+                progbar.config(value=i+1)
+                progbar.update()
             return True

@@ -184,7 +184,19 @@ class View(tk.Frame):
         contributor_label.grid(sticky=tk.NSEW, padx=20, pady=10)
         video_info.config(command=lambda: show_video_info(help_window, fps, video_len, width, height))
         contributor_label.config(command=lambda: show_contributor_info(help_window))
+    
+    def create_progress_bar(self, displayed_label: str = "Saving..."):
+        self.progress_bar_window = tk.Toplevel(self.parent)
+        self.progress_bar_window.title("Progress Bar")
+        self.progress_bar_window.grab_set()
+        self.progress_label = ttk.Label(self.progress_bar_window, text=displayed_label)
+        self.progbar = ttk.Progressbar(self.progress_bar_window)
+        self.progress_label.grid(row=0, column=0, padx=20, pady=(30, 0))
+        self.progbar.grid(row=1, column=0, padx=20, pady=30)
+        return self.progbar
 
-    
-    
-    
+    def delete_progress_bar(self):
+        self.progress_bar_window.destroy()
+        self.progbar.destroy()
+        self.progress_label.destroy()
+         
