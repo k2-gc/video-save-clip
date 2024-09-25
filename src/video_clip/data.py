@@ -208,14 +208,27 @@ class Model:
             index_list.append(tmp)
         out_dir = get_suffix(video_name, False)
         Path(out_dir).mkdir()
-        for i in tqdm(range(frame_num_in_span+1)):
-            ret, frame = self.cap.read()
-            if not ret:
-                self.logger.warning(f"Frame finished")
-                break
-            if not i in index_list:
-                continue
-            cv2.imwrite(self.output_tmp_frame_path, frame)
-            shutil.move(self.output_tmp_frame_path, f"{out_dir}/frame_{str(self.clip_start_pos+i).zfill(10)}.jpg")
-        return True
-    
+
+        # Expect over 10FPS * 20min
+        if frame_num_in_span > 12000:
+            tmp_cap = cv2.VideoCapture(self.tmp_video_path)
+            for index in tqdm(index_list):
+                tmp_cap.set(cv2.CAP_PROP_POS_FRAMES, index+self.clip_start_pos)
+                ret, frame = tmp_cap.read()
+                if not ret:
+                    break
+                cv2.imwrite(self.output_tmp_frame_path, frame)
+                shutil.move(self.output_tmp_frame_path, f"{out_dir}/frame_{str(index+self.clip_start_pos).zfill(10)}.jpg")
+            tmp_cap.release()
+        else:
+            # Including bug
+            for i in tqdm(range(frame_num_in_span+1)):
+                ret, frame = self.cap.read()
+                if not ret:
+                    self.logger.warning(f"Frame finished")
+                    break
+                if not i in index_list:
+                    continue
+                cv2.imwrite(self.output_tmp_frame_path, frame)
+                shutil.move(self.output_tmp_frame_path, f"{out_dir}/frame_{str(self.clip_start_pos+i).zfill(10)}.jpg")
+            return True
