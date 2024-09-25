@@ -64,8 +64,8 @@ A Window like below will be displayed.
 9. Press "q" key on keyboard when you want to quit
 
 ## TODO
-* Use "help" combbox insted of "help" window
-* Add video length info
-* Change the place to store file name from controller to data
-* Use tkinter progress bar when clipping/saving.
-* Use input textbox in "Start pos" and "Stop pos" index.
+- [ ] Use "help" combbox insted of "help" window
+- [ ] Add video length info
+- [ ] Change the place to store file name from controller to data
+- [x] ~~Use tkinter progress bar when clipping/saving.~~
+- [ ] Use input textbox in "Start pos" and "Stop pos" index.
