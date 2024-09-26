@@ -34,7 +34,7 @@ class Model:
         self.save_frame_num = 0
 
     def __del__(self):
-        # del self.cap
+        del self.cap
         if os.path.exists(self.tmp_video_path):
             os.remove(self.tmp_video_path)
             self.logger.info(f"'{self.tmp_video_path}' deleting...")
